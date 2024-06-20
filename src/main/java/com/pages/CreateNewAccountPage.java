@@ -28,7 +28,8 @@ public class CreateNewAccountPage {
 	By greetingMessage=By.xpath("//div[@class='panel header']//li[@class='greet welcome']/span[contains(text(),'Welcome')]");
 	By arrowBtn=By.xpath("//span[text()='Change']/parent::button");
 	By signOutBtn=By.xpath("//span[@class='customer-name active']/following-sibling::div[@class='customer-menu']//a[contains(text(),'Sign Out')]");
-	By invalidPassswordMsg=By.id("password-confirmation-error"); 
+	By invalidPassswordMsg=By.id("password-confirmation-error");
+	By signoutMsg=By.xpath("//h1[@class='page-title']/span");
 	
 	public void enterFirstName(String fname) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField)).sendKeys(fname);
@@ -67,7 +68,6 @@ public class CreateNewAccountPage {
 	
 	public String getGreetingMessage() {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(greetingMessage)).getText().trim();
-	
 	}
 	
 	public void verifyMessage(String expectedMsg) {
@@ -77,6 +77,14 @@ public class CreateNewAccountPage {
 	public boolean verifyGreetMessage(String name) {
 		System.out.println(getGreetingMessage());
 		return getGreetingMessage().contains(name);
+	}
+
+	public String getSignoutMessage() {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(signoutMsg)).getText().trim();
+	}
+
+	public boolean verifySignOutMessage() {
+		return getSignoutMessage().equals("You are signed out");
 	}
 	
 	public void signOut() {
